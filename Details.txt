@@ -60,4 +60,28 @@ For Ubuntu:
 
 
 
+-----------------------------------------------------------------------------
+Dockerise Now
 
+sudo apt install docker.io -y
+
+Dockerfile.txt
+
+FROM python:3
+RUN pip install django==4.0.6
+COPY . .   // first dot is copy from source to second dot is destination 
+RUN python manage.py makemigrations  // Not necessary
+RUN python manage.py migrate	
+CMD ["python","manage.py","runserver","0.0.0.0:8000"]
+
+
+
+docker build -t todo-app . 
+or
+docker build . -t todo-app
+
+incase if you get permission denied, do sudo su -
+
+docker run --name my-todo-container -p 80:8000 todo-app # accessible on public Ip of VM
+
+docker run -p 8000:8000 todo-app // Accessible on Public Ip of VM followed by 8000 (X.X.X.X:8000)
