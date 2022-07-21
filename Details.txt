@@ -1,0 +1,63 @@
+virtualenv -p python3.7 env
+
+
+virtualenv = command
+-p = python
+python3.7 = version
+env = name of env
+===================================================================================
+for me the above did not work so i used: virtualenv env
+
+An env named folder will be created, which has to be activated
+
+.\env\Scripts\activate.ps1   (type env tab S tab act tab and tag till you get ps1 which is powersshell, snce we want to use this env in powershell)
+
+====================================================================================
+sudo su -
+apt-get update
+apt install python3-pip  ---> For Ubuntu VM use python3 instaed of python everwhere
+
+cd .\django-todo-list\
+pip install django
+
+python manage.py makemigrations [No Changes detected]
+
+python manage.py migrate [Ok aayega]
+
+python manage.py createsuperuser [Username: shubham, mail: shub@gmail.com, pass: ApnaTimeAagaya] [Superuser created successfully]
+python manage.py runserver
+
+pip freeze > requirements.txt [all things installed in local will be shownhere in requirements.txt] [Will be helpful in docker]
+
+
+
+For Ubuntu:
+1) Use python3 instaed of python everwhere
+
+2) python3 manage.py runserver 0.0.0.0:8000 // open Custom TCP : 8000 port of the EC2 instance
+
+2) ValueError: Incorrect timezone setting: Asia/kolkata
+     to solve this add the above ip in todoApp/settings.py
+     TIME_ZONE = 'Asia/Dhaka' instead of 'Asia/kolkata'
+
+3) Invalid HTTP_HOST header: '3.89.133.149:8000'. You may need to add '3.89.133.149' to ALLOWED_HOSTS.
+    to solve this add the above ip in todoApp/settings.py    
+    ALLOWED_HOSTS = ['3.89.133.149','localhost','127.0.0.1'] // where 3.89.133.149 is the public IP of VM
+    or use ALLOWED_HOSTS = ['*']
+
+4) To run the program as a background process
+    nohup python3 manage.py runserver 0.0.0.0:8000 &
+
+5) To stop the app
+    lsof losts all the services running on that port, and kill the process using its process id
+    i) lsof -i:8000
+=============================================================================
+     COMMAND  PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+     python3 2695 root    4u  IPv4  27095      0t0  TCP *:8000 (LISTEN)
+=============================================================================
+    ii) kill -9 2695
+
+
+
+
+
