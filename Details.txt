@@ -85,3 +85,7 @@ incase if you get permission denied, do sudo su -
 docker run --name my-todo-container -p 80:8000 todo-app # accessible on public Ip of VM
 
 docker run -p 8000:8000 todo-app // Accessible on Public Ip of VM followed by 8000 (X.X.X.X:8000)
+
+
+
+// 8000 is the default port of django
